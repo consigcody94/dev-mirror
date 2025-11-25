@@ -1,121 +1,180 @@
-# Dev Mirror
+# 📊 Dev Mirror
 
-A Model Context Protocol (MCP) server for tracking developer productivity metrics and comparing AI-assisted vs manual coding sessions.
+**Track your real developer productivity - AI-assisted vs manual coding, with data-driven insights**
 
-## Overview
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![MCP](https://img.shields.io/badge/MCP-Compatible-green)](https://github.com/anthropics/mcp)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js)](https://nodejs.org/)
 
-Dev Mirror helps you answer the question: "Is AI actually making me more productive?" Rather than relying on subjective feelings, this tool tracks objective metrics across your development sessions to provide data-driven insights.
+---
 
-### The Problem
+## 🤔 The Question Everyone's Asking
 
-Studies suggest developers using AI tools may be "19% slower" - but raw speed metrics miss the bigger picture. What matters is:
+**"Is AI actually making me more productive?"**
 
-- Did the code work on the first try?
-- How many iterations did it take to get a working solution?
-- What was the build success rate?
-- How often did you context switch?
+Studies claim developers using AI tools are "19% slower" - but raw speed metrics miss the bigger picture. What actually matters:
 
-### The Solution
+- ✅ Did the code work on the first try?
+- 🔄 How many iterations to get a working solution?
+- 🏗️ What was the build success rate?
+- 🧠 How often did you context switch?
 
-Dev Mirror tracks what actually matters - your real productivity metrics across AI-assisted and manual coding sessions, then generates comparative reports.
+**Dev Mirror tracks what matters** - objective metrics across your development sessions, then generates comparative reports so you can make data-driven decisions.
 
-## Features
+---
 
-- **Session Tracking** - Start, update, and end development sessions with full metrics
-- **Statistics Dashboard** - View aggregated stats filtered by type, time range, and tags
-- **AI vs Manual Comparison** - Direct side-by-side comparison of development approaches
-- **Quality Scoring** - Objective code quality scores based on multiple factors
-- **Report Generation** - Comprehensive Markdown or JSON reports
+## ✨ Features
 
-## Installation
+| Feature | Description |
+|---------|-------------|
+| 📝 **Session Tracking** | Start, update, and end development sessions with full metrics |
+| 📈 **Statistics Dashboard** | View aggregated stats filtered by type, time range, and tags |
+| ⚖️ **AI vs Manual Comparison** | Direct side-by-side comparison of development approaches |
+| 🎯 **Quality Scoring** | Objective code quality scores based on multiple factors |
+| 📄 **Report Generation** | Comprehensive Markdown or JSON reports with ASCII charts |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+
+- Claude Desktop installed
+
+### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/consigcody94/dev-mirror.git
 cd dev-mirror
-
-# Install dependencies
 npm install
-
-# Build the project
 npm run build
 ```
 
-## Configuration
+### Configure Claude Desktop
 
-### Data Storage
+Add to your config file:
 
-By default, session data is stored in `~/.dev-mirror/sessions.json`. You can customize this location:
-
-```bash
-export DEV_MIRROR_DATA_DIR="/path/to/custom/data/directory"
-```
-
-### Claude Desktop Integration
-
-Add to your `claude_desktop_config.json`:
+| Platform | Path |
+|----------|------|
+| macOS | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+| Windows | `%APPDATA%\Claude\claude_desktop_config.json` |
+| Linux | `~/.config/Claude/claude_desktop_config.json` |
 
 ```json
 {
   "mcpServers": {
     "dev-mirror": {
       "command": "node",
-      "args": ["/absolute/path/to/dev-mirror/build/index.js"],
-      "env": {
-        "DEV_MIRROR_DATA_DIR": "/optional/custom/path"
-      }
+      "args": ["/absolute/path/to/dev-mirror/build/index.js"]
     }
   }
 }
 ```
 
-**Config file locations:**
-- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-- Linux: `~/.config/Claude/claude_desktop_config.json`
+### Restart Claude Desktop
+Completely quit and reopen Claude Desktop to load the MCP server.
 
-## Tools Reference
+---
 
-### track_session
+## 💬 Usage Examples
 
-Start, update, or end a development session.
+### Start a Coding Session
+```
+"Start tracking an AI-assisted session for implementing user authentication"
+→ Creates session with ID, ready to track your work
 
-**Parameters:**
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `action` | string | Yes | `"start"`, `"end"`, or `"update"` |
-| `sessionId` | string | For end/update | Session ID returned from start |
-| `type` | string | No | `"ai-assisted"` or `"manual"` (default: ai-assisted) |
-| `task` | string | No | Description of the task |
-| `linesAdded` | number | No | Lines of code added |
-| `linesDeleted` | number | No | Lines of code deleted |
-| `filesModified` | number | No | Number of files changed |
-| `testsPassed` | number | No | Number of passing tests |
-| `testsFailed` | number | No | Number of failing tests |
-| `buildSucceeded` | boolean | No | Whether the build passed |
-| `iterationCount` | number | No | Number of attempts/iterations |
-| `contextSwitches` | number | No | Times you switched tasks |
-| `notes` | string | No | Additional notes |
-| `tags` | string[] | No | Tags for categorization |
-
-**Example - Start a session:**
-
-```json
-{
-  "action": "start",
-  "type": "ai-assisted",
-  "task": "Implement user authentication",
-  "tags": ["backend", "security"]
-}
+"Start a manual coding session for the payment integration"
+→ Tracks manual (non-AI) development for comparison
 ```
 
-**Example - End a session:**
+### End Session with Metrics
+```
+"End my session - I added 250 lines, deleted 30, modified 5 files, 15 tests passed, build succeeded"
+→ Records all metrics and calculates session statistics
+```
+
+### Compare Your Productivity
+```
+"Compare my AI-assisted vs manual productivity this month"
+→ Shows side-by-side comparison of:
+   • Average session duration
+   • Lines per minute
+   • Build success rate
+   • Iterations per session
+   • Context switches
+```
+
+### Generate Reports
+```
+"Generate a weekly productivity report"
+→ Creates comprehensive Markdown report with charts and insights
+
+"What's my code quality score for this week?"
+→ Calculates weighted score based on tests, builds, iterations
+```
+
+---
+
+## 🛠️ Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `track_session` | Start, update, or end a development session with metrics |
+| `get_stats` | Get aggregated productivity statistics with filters |
+| `compare_ai_vs_manual` | Generate comparison between AI and manual development |
+| `code_quality_score` | Calculate quality score (0-100) for sessions |
+| `generate_report` | Create comprehensive Markdown or JSON reports |
+
+---
+
+## 📊 Metrics Tracked
+
+### Per Session
+| Metric | Description |
+|--------|-------------|
+| `linesAdded` | Lines of code added |
+| `linesDeleted` | Lines of code deleted |
+| `filesModified` | Number of files changed |
+| `testsPassed` | Number of passing tests |
+| `testsFailed` | Number of failing tests |
+| `buildSucceeded` | Whether the build passed |
+| `iterationCount` | Number of attempts/iterations |
+| `contextSwitches` | Times you switched tasks |
+
+### Aggregated Statistics
+- Total sessions (AI vs manual breakdown)
+- Total time in minutes
+- Average session duration
+- Build success rate
+- Lines per minute
+- Test pass rate
+
+---
+
+## 🏗️ Architecture
+
+```
+dev-mirror/
+├── src/
+│   └── index.ts          # MCP server with all tools
+├── build/                # Compiled JavaScript
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+### Data Storage
+
+Sessions are stored locally in `~/.dev-mirror/sessions.json`:
 
 ```json
 {
-  "action": "end",
-  "sessionId": "session-1234567890",
+  "id": "session-1234567890",
+  "startTime": "2024-01-15T10:00:00.000Z",
+  "endTime": "2024-01-15T11:30:00.000Z",
+  "type": "ai-assisted",
+  "task": "Implement user authentication",
   "linesAdded": 250,
   "linesDeleted": 30,
   "filesModified": 5,
@@ -123,88 +182,60 @@ Start, update, or end a development session.
   "testsFailed": 0,
   "buildSucceeded": true,
   "iterationCount": 2,
-  "contextSwitches": 1
+  "contextSwitches": 1,
+  "tags": ["backend", "security"]
 }
 ```
 
-### get_stats
+---
 
-Retrieve aggregated productivity statistics.
+## 🎯 Use Cases
 
-**Parameters:**
+### For Individual Developers
+- Track your actual productivity with objective data
+- Compare AI-assisted vs manual coding effectiveness
+- Identify patterns in your most productive sessions
+- Generate reports for personal retrospectives
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `type` | string | No | `"all"`, `"ai-assisted"`, or `"manual"` (default: all) |
-| `timeRange` | string | No | `"day"`, `"week"`, `"month"`, or `"all"` (default: all) |
-| `tags` | string[] | No | Filter by specific tags |
+### For Teams
+- Standardize productivity metrics across team
+- Data-driven decisions on AI tool adoption
+- Identify training opportunities
+- Track improvement over time
 
-**Example:**
+### For AI Tool Evaluation
+- Objective comparison of different AI assistants
+- Measure actual impact on code quality
+- Track iteration counts and build success rates
+- Generate evidence-based reports
+
+---
+
+## 🔧 Configuration
+
+### Custom Data Directory
+
+```bash
+export DEV_MIRROR_DATA_DIR="/path/to/custom/data/directory"
+```
+
+Or in Claude Desktop config:
 
 ```json
 {
-  "type": "ai-assisted",
-  "timeRange": "week",
-  "tags": ["backend"]
+  "mcpServers": {
+    "dev-mirror": {
+      "command": "node",
+      "args": ["/path/to/dev-mirror/build/index.js"],
+      "env": {
+        "DEV_MIRROR_DATA_DIR": "/custom/path"
+      }
+    }
+  }
 }
 ```
 
-**Response includes:**
-- Total sessions count
-- AI-assisted vs manual session counts
-- Total time in minutes
-- Average session duration
-- Total lines added/deleted
-- Build success rate
-- Average iterations per session
-- Average context switches
-
-### compare_ai_vs_manual
-
-Generate a direct comparison between AI-assisted and manual development.
-
-**Parameters:**
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `timeRange` | string | No | `"day"`, `"week"`, `"month"`, or `"all"` |
-| `metrics` | string[] | No | Specific metrics to compare |
-
-**Available metrics:**
-- `duration` - Average session duration
-- `linesPerMinute` - Code output rate
-- `testPassRate` - Percentage of tests passing
-- `buildSuccessRate` - Percentage of successful builds
-- `iterationsPerSession` - Average attempts needed
-- `contextSwitches` - Average task switches
-
-**Example:**
-
-```json
-{
-  "timeRange": "month",
-  "metrics": ["duration", "buildSuccessRate", "iterationsPerSession"]
-}
-```
-
-### code_quality_score
-
-Calculate a quality score (0-100) for sessions.
-
-**Parameters:**
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `sessionId` | string | No | Specific session to score (omit for all) |
-| `weights` | object | No | Custom scoring weights |
-
-**Default weights:**
-- Test Pass Rate: 30%
-- Build Success: 30%
-- Low Iterations: 20% (fewer = better)
-- Low Context Switches: 20% (fewer = better)
-
-**Example with custom weights:**
+### Custom Quality Weights
 
 ```json
 {
@@ -217,108 +248,66 @@ Calculate a quality score (0-100) for sessions.
 }
 ```
 
-### generate_report
+---
 
-Generate a comprehensive productivity report.
-
-**Parameters:**
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `format` | string | No | `"markdown"` or `"json"` (default: markdown) |
-| `timeRange` | string | No | `"day"`, `"week"`, `"month"`, or `"all"` (default: week) |
-| `includeCharts` | boolean | No | Include ASCII charts (default: true) |
-
-**Example:**
-
-```json
-{
-  "format": "markdown",
-  "timeRange": "week"
-}
-```
-
-## Workflow Example
-
-1. **Start your coding session:**
-   ```
-   track_session with action: "start", type: "ai-assisted", task: "Add payment processing"
-   ```
-
-2. **Code your feature** (with or without AI assistance)
-
-3. **End the session with metrics:**
-   ```
-   track_session with action: "end", sessionId: "...", linesAdded: 150, testsPassed: 8, buildSucceeded: true
-   ```
-
-4. **Review your productivity:**
-   ```
-   compare_ai_vs_manual with timeRange: "week"
-   ```
-
-5. **Generate a report:**
-   ```
-   generate_report with format: "markdown", timeRange: "month"
-   ```
-
-## Data Format
-
-Sessions are stored as JSON in `~/.dev-mirror/sessions.json`:
-
-```json
-[
-  {
-    "id": "session-1234567890",
-    "startTime": "2024-01-15T10:00:00.000Z",
-    "endTime": "2024-01-15T11:30:00.000Z",
-    "type": "ai-assisted",
-    "task": "Implement user authentication",
-    "linesAdded": 250,
-    "linesDeleted": 30,
-    "filesModified": 5,
-    "testsPassed": 15,
-    "testsFailed": 0,
-    "buildSucceeded": true,
-    "iterationCount": 2,
-    "contextSwitches": 1,
-    "notes": "Used Claude for boilerplate",
-    "tags": ["backend", "security"]
-  }
-]
-```
-
-## Requirements
-
-- Node.js 18 or higher
-- npm or yarn
-
-## Troubleshooting
+## 🐛 Troubleshooting
 
 ### Server won't start
 
-1. Ensure Node.js 18+ is installed: `node --version`
-2. Rebuild the project: `npm run build`
-3. Check the path in your Claude Desktop config is absolute
+| Issue | Solution |
+|-------|----------|
+| Node version | Ensure Node.js 18+: `node --version` |
+| Build failed | Run `npm run build` |
+| Path issues | Use absolute path in Claude Desktop config |
 
 ### Data not persisting
 
-1. Check write permissions to the data directory
-2. Verify `DEV_MIRROR_DATA_DIR` is set correctly if using custom location
+| Issue | Solution |
+|-------|----------|
+| Permissions | Check write permissions to data directory |
+| Custom path | Verify `DEV_MIRROR_DATA_DIR` is set correctly |
 
-### Sessions not showing in stats
+### Sessions not showing
 
-1. Ensure sessions are properly ended with `action: "end"`
-2. Check the `timeRange` filter isn't excluding your sessions
+| Issue | Solution |
+|-------|----------|
+| Not ended | Ensure sessions are ended with `action: "end"` |
+| Filtered out | Check `timeRange` filter isn't excluding sessions |
 
-## License
+### Tools not showing in Claude Desktop
 
-MIT License - see [LICENSE](LICENSE) file for details.
+1. Check config path is correct
+2. Verify absolute path to `build/index.js`
+3. Completely restart Claude Desktop (Quit, not just close)
+4. Check Claude Desktop logs for errors
 
-## Contributing
+---
+
+## 📚 Resources
+
+- [Model Context Protocol](https://github.com/anthropics/mcp)
+- [Claude Desktop](https://claude.ai/download)
+
+---
+
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Author
+---
 
-consigcody94
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**consigcody94**
+
+---
+
+<p align="center">
+  <i>Stop guessing about your productivity. Start measuring it.</i>
+</p>
